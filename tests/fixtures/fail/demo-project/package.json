@@ -1,0 +1,17 @@
+{
+  "name": "whale-doc-assistant",
+  "version": "1.4.2",
+  "private": true,
+  "description": "文档助手：上传材料，自动出摘要与答复草稿",
+  "type": "module",
+  "main": "src/server/index.js",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "node --watch src/server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "openai": "^4.67.3",
+    "zod": "^3.23.8"
+  }
+}

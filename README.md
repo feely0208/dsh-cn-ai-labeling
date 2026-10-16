@@ -1,14 +1,31 @@
 # @deepwhale-cn/dsh-cn-ai-labeling
 
-
-## 安装
-
-```bash
-dsh plugin --profile web add @deepwhale-cn/dsh-cn-ai-labeling
-```
 **AI 生成合成内容标识合规自检** —— 给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 用的 skill 插件。
 
 面向中国大陆市场的 AI 产品，在**设计和发版前**逐条核对生成合成内容标识是否落实。规则来自官方原文，不凭记忆。
+
+## 它能扫出什么（5 条规则）
+
+技能负责「怎么做」，规则引擎负责「有没有做」。同一条命令出证据：
+
+```bash
+dsh-ai-labeling --root <项目路径>      # 扫一遍
+dsh-ai-labeling --demo                # 看内置演示样本
+dsh-ai-labeling --list-rules          # 列出规则与依据
+```
+
+| 规则 | 查什么 | 级别 |
+|---|---|---|
+| `AILABEL-NO-DISCLOSURE` | 生成结果直接回给用户的文件里，没有任何「AI 生成」显式标识 | 高 |
+| `AILABEL-MISSING-TEXT` | 全项目找不到一句「AI 生成 / 由 AI 生成 / AI-generated」标识文案 | 高 |
+| `AILABEL-NO-REVIEW` | 面向用户输出缺「人工核验 / 仅供参考」提示 | 中 |
+| `AILABEL-NO-IMPLICIT-META` | 生成产出文件缺 `generated_by` / `ai_generated` 等隐式标识元数据 | 中 |
+| `AILABEL-VAGUE-GENERATED` | 文案写「自动生成 / 系统生成」但无 AI 字样 | 低 |
+
+**每条规则都带 `when` 守卫** —— 不用 AI 的项目上，5 条规则记为「不适用」而不是「通过」，
+报告会明写「N 条因不适用本项目未运行」。这一条是防假绿：**不适用 ≠ 没问题。**
+
+**边界**：只做静态检查，报出来是提示确认，不是判定违规；图片/音视频里的隐式标识（数字水印）看不见。
 
 ## 依据
 

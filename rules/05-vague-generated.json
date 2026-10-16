@@ -1,0 +1,48 @@
+{
+  "id": "AILABEL-VAGUE-GENERATED",
+  "title": "面向用户的文案写「自动生成 / 系统生成」，却没有说明是 AI 生成",
+  "severity": "low",
+  "source": "《人工智能生成合成内容标识办法》第4条（文字提示标识应包含「人工智能」或者「AI」等字样，不得使用容易让用户误解为自然人的表述）；GB 45438—2025《网络安全技术 人工智能生成合成内容标识方法》（强制性国标）第 5、6 章；附录 E（规范性）。",
+  "advice": "「自动生成」「系统生成」听起来像模板拼接或后台定时任务，用户看不出背后是模型。把这些文案改成带 AI 字样的显式标识，例如「内容由 AI 自动生成，仅供参考」。注意别走向另一头：不能把它写成「作者」「编辑」这类像自然人的身份表述来规避标识。",
+  "check": {
+    "type": "file-pattern",
+    "when": "(openai|anthropic|deepseek|@deepseek-ai|google\\.generativeai|cohere|zhipuai|dashscope|qianfan|generateText|streamText|chat\\.completions|ChatOpenAI)",
+    "pattern": "(自动生成|系统生成|智能生成|机器生成)",
+    "flags": "g",
+    "exts": [
+      ".js",
+      ".mjs",
+      ".cjs",
+      ".ts",
+      ".tsx",
+      ".jsx",
+      ".vue",
+      ".svelte",
+      ".html",
+      ".htm",
+      ".css",
+      ".json",
+      ".md"
+    ],
+    "paths": [
+      "**/ui/**",
+      "**/pages/**",
+      "**/views/**",
+      "**/components/**",
+      "**/copy/**",
+      "**/i18n/**",
+      "**/locales/**",
+      "**/lang/**",
+      "**/messages/**",
+      "**/templates/**",
+      "**/*.html"
+    ],
+    "exclude": [
+      "AI",
+      "人工智能",
+      "大模型",
+      "智能体"
+    ],
+    "max": 20
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "AILABEL-NO-IMPLICIT-META",
+  "title": "AI 生成内容的产出文件里没有隐式标识（generated_by / ai_generated 等元数据字段）",
+  "severity": "medium",
+  "source": "《人工智能生成合成内容标识办法》第5条（隐式标识：在生成合成内容文件的数据中添加属性信息，如生成合成内容属性、服务提供者名称/编码、内容编号）；《生成式人工智能服务管理暂行办法》第12条；GB 45438—2025《网络安全技术 人工智能生成合成内容标识方法》（强制性国标）第 5、6 章；附录 E（规范性）。",
+  "advice": "显式标识给人看，隐式标识给机器看 —— 例如在元数据里写 generated_by / ai_generated / model / service_provider / content_id。它的作用是内容被搬运、被二次分发之后，仍然能追溯来源。建议在生成产物落库或落盘的那一层统一注入这些字段，并对下游传递做保留。",
+  "check": {
+    "type": "file-pattern",
+    "when": "(openai|anthropic|deepseek|@deepseek-ai|google\\.generativeai|cohere|zhipuai|dashscope|qianfan|generateText|streamText|chat\\.completions|ChatOpenAI)",
+    "pattern": "= *await +[A-Za-z_$][\\w$]*\\.(chat\\.completions\\.create|messages\\.create|responses\\.create|createChatCompletion)\\(|new ChatOpenAI\\(",
+    "flags": "g",
+    "exts": [
+      ".js",
+      ".mjs",
+      ".cjs",
+      ".ts",
+      ".tsx",
+      ".jsx",
+      ".py",
+      ".rb",
+      ".php",
+      ".go",
+      ".java"
+    ],
+    "exclude": [
+      "generated_by",
+      "generatedBy",
+      "ai_generated",
+      "aiGenerated",
+      "is_ai_generated",
+      "aigc",
+      "service_provider",
+      "serviceProvider",
+      "content_id",
+      "contentId",
+      "model_name",
+      "modelName",
+      "digital_signature",
+      "signature"
+    ],
+    "max": 20
+  }
+}

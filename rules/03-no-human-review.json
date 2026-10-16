@@ -1,0 +1,42 @@
+{
+  "id": "AILABEL-NO-REVIEW",
+  "title": "把 AI 生成结果直接回给用户的文件里，看不到「人工核验 / 仅供参考」提示",
+  "severity": "medium",
+  "source": "《人工智能生成合成内容标识办法》第4条、第5条（提示用户该内容由 AI 生成合成，可能存在不准确）；《生成式人工智能服务管理暂行办法》第12条（保障用户知情权）；GB 45438—2025《网络安全技术 人工智能生成合成内容标识方法》（强制性国标）第 5、6 章；附录 E（规范性）。",
+  "advice": "AI 生成是概率输出，会有事实性错误。面向用户的输出旁边加一句「本内容由 AI 生成，仅供参考，请人工核验」，用户才知道该不该直接采信。放在页面显著位置或接口返回体的提示字段里 —— 藏在后台日志、管理端说明里等于没写。",
+  "check": {
+    "type": "file-pattern",
+    "when": "(openai|anthropic|deepseek|@deepseek-ai|google\\.generativeai|cohere|zhipuai|dashscope|qianfan|generateText|streamText|chat\\.completions|ChatOpenAI)",
+    "wholeFile": true,
+    "pattern": "(res|reply|ctx|response|reply_?message)\\.(json|send|reply|write)\\s*\\([^)]{0,200}(ai[A-Z_]|ai_|generateText|generate_text|llm|completion|chat\\.completions)",
+    "flags": "gi",
+    "exts": [
+      ".js",
+      ".mjs",
+      ".cjs",
+      ".ts",
+      ".tsx",
+      ".jsx",
+      ".vue",
+      ".svelte",
+      ".py",
+      ".rb",
+      ".php",
+      ".go",
+      ".java"
+    ],
+    "exclude": [
+      "人工核验",
+      "仅供参考",
+      "请自行判断",
+      "可能存在错误",
+      "请核实",
+      "人工确认",
+      "人工复核",
+      "for reference only",
+      "human review",
+      "may be inaccurate"
+    ],
+    "max": 20
+  }
+}
