@@ -1,5 +1,7 @@
 # @deepwhale-cn/dsh-cn-ai-labeling
 
+[![dshfind 收录](https://dshfind.com/api/badge/feely0208/dsh-cn-ai-labeling?lang=zh)](https://dshfind.com/zh/plugins/feely0208/dsh-cn-ai-labeling)
+
 [![Listed on DSH Plugin Hub](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/zh/plugins/feely0208/dsh-cn-ai-labeling)
 
 **AI 生成合成内容标识合规自检** —— 给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 用的 skill 插件。
